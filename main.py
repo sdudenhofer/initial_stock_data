@@ -115,7 +115,7 @@ base_2025 = alt.Chart(data_2025).encode(
 ).properties(
     width=900,
     height=500,
-    title="2023 Closing Price by Month"
+    title="2025 Closing Price by Month"
 )
 
 line_2025 = base_2025.mark_line().encode(x="Date", y="Close")
