@@ -6,11 +6,17 @@ import streamlit as st
 
 tickers = ['AAPL', 'NVDA', 'MSFT', 'AMZN', 'GOOG']
 
-data = yf.download(tickers, start="2024-01-01", end="2024-12-31")
+data = yf.download(tickers, start="2025-01-01")
 data = data.loc[(slice(None)),(slice(None),slice(None))].copy()
 data = data.stack()
 data = data.reset_index()
 data.rename(columns={'level_1': 'Symbol'}, inplace=True)
+
+data_2025 = yf.download(tickers, start="2024-01-01", end="2024-12-31")
+data_2025 = data_2025.loc[(slice(None)),(slice(None),slice(None))].copy()
+data_2025 = data_2025.stack()
+data_2025 = data_2025.reset_index()
+data_2025.rename(columns={'level_1': 'Symbol'}, inplace=True)
 
 st.header("Stock Data")
 
@@ -18,7 +24,7 @@ st.header("Stock Data")
 st.sidebar.header("Options")
 years = st.sidebar.selectbox(
     'Select which year you would like to see.',
-    ('2023', '2024')
+    ('2023', '2024', '2025')
 )
 
 stock_data = st.sidebar.selectbox(
@@ -103,9 +109,39 @@ chart_2023 = (line_2023 + last_price_2023 + company_name_2023).encode(
     y=alt.Y().title("Close")
 )
 
+base_2025 = alt.Chart(data_2025).encode(
+    alt.Color("Ticker").legend(None),
+    tooltip = "Close"
+).properties(
+    width=900,
+    height=500,
+    title="2023 Closing Price by Month"
+)
+
+line_2025 = base_2025.mark_line().encode(x="Date", y="Close")
+
+
+last_price_2025 = base_2025.mark_circle().encode(
+    alt.X("last_date['Date']:T"),
+    alt.Y("last_date['Closing Price']:Q")
+).transform_aggregate(
+    last_date="argmax(Date)",
+    groupby=["Ticker"]
+)
+
+company_name_2025 = last_price_2025.mark_text(align="left", dx=4).encode(text="Ticker")
+
+chart_2025 = (line_2025 + last_price_2025 + company_name_2025).encode(
+    x=alt.X().title("Date"),
+    y=alt.Y().title("Close")
+)
+
+
 
 if years == '2024':
     st.write(chart_2024 )
-else:
+elif years == '2023':
     st.write(chart_2023)
+else:
+    st.write(chart_2025)
 
