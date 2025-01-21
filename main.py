@@ -142,6 +142,6 @@ if years == '2024':
     st.write(chart_2024 )
 elif years == '2023':
     st.write(chart_2023)
-else:
+elif years == '2025':
     st.write(chart_2025)
 
