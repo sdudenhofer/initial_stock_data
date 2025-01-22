@@ -43,6 +43,12 @@ st.sidebar.write("Day High")
 st.sidebar.write(single_source.info["dayHigh"])
 st.sidebar.write("Day Low")
 st.sidebar.write(single_source.info["dayLow"])
+data_2025['price_diff'] = data_2025['Close'] - data_2025['Open']
+st.sidebar.write("Current Year Data")
+current_diff = data[['Date', 'price_diff']].values.tolist()
+for row in current_diff:
+    st.sidebar.write(row[0] + ', ' + row[1])
+
 
 # charts
 base = alt.Chart(data).encode(
