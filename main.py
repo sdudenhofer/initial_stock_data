@@ -50,7 +50,8 @@ data['New_Date'] = pd.to_datetime(data['Date']).dt.date
 
 current_diff = data[['New_Date', 'price_diff']].values.tolist()
 for row in current_diff:
-    st.sidebar.write(str(row[0]) + " || " + str(row[1]))
+    number = round(row[1], 2)
+    st.sidebar.write(str(row[0]) + " || " + str(number))
 
 
 # charts
