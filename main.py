@@ -3,6 +3,7 @@ import yfinance as yf
 import pandas as pd
 import altair as alt
 import streamlit as st
+import datetime as dt
 
 tickers = ['AAPL', 'NVDA', 'MSFT', 'AMZN', 'GOOG']
 
@@ -47,6 +48,7 @@ data_2025['price_diff'] = data_2025['Close'] - data_2025['Open']
 st.sidebar.write("Current Year Data")
 current_diff = data_2025[['Date', 'price_diff']].values.tolist()
 for row in current_diff:
+    dates = row[0].dt.datetime.date()
     st.sidebar.write(str(row[0]) + " || " + str(row[1]))
 
 
