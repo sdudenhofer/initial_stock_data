@@ -49,9 +49,8 @@ st.sidebar.write("Current Year Data")
 data['New_Date'] = pd.to_datetime(data['Date']).dt.date
 
 current_diff = data[['New_Date', 'price_diff']].values.tolist()
-for row in current_diff:
-    number = round(row[1], 2)
-    st.sidebar.table(str(row[0]) + str(number))
+current_diff.round(2)
+st.sidebar.table(current_diff)
 
 
 # charts
