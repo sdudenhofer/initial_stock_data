@@ -46,7 +46,7 @@ st.sidebar.write("Day Low")
 st.sidebar.write(single_source.info["dayLow"])
 data['price_diff'] = data['Close'] - data['Open']
 st.sidebar.write("Current Year Data")
-data['New_Date'] = pd.to_datetime(data['Date'])
+data['New_Date'] = pd.to_datetime(data['Date']).date()
 
 current_diff = data[['New_Date', 'price_diff']]
 current_diff.round(2)
@@ -148,10 +148,10 @@ chart_2025 = (line_2025 + last_price_2025 + company_name_2025).encode(
 
 
 
-if years == '2024':
+if years == '2025':
     st.write(chart_2024 )
 elif years == '2023':
     st.write(chart_2023)
-elif years == '2025':
+elif years == '2024':
     st.write(chart_2025)
 
