@@ -48,7 +48,7 @@ data['price_diff'] = data['Close'] - data['Open']
 st.sidebar.write("Current Year Data")
 data['New_Date'] = pd.to_datetime(data['Date']).dt.date
 
-current_diff = data[['New_Date', 'price_diff']].values.tolist()
+current_diff = data[['New_Date', 'price_diff']]
 current_diff.round(2)
 st.sidebar.table(current_diff)
 
