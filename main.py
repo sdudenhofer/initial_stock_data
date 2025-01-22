@@ -50,7 +50,7 @@ data['New_Date'] = pd.to_datetime(data['Date']).dt.date
 
 current_diff = data[['New_Date', 'price_diff']]
 current_diff.round(2)
-current_diff['mean'] = current_diff.mean(axis=1)
+current_diff['mean'] = current_diff.mean('price_diff')
 st.sidebar.table(current_diff)
 
 
