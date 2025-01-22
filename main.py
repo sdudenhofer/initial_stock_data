@@ -47,7 +47,7 @@ data_2025['price_diff'] = data_2025['Close'] - data_2025['Open']
 st.sidebar.write("Current Year Data")
 current_diff = data_2025[['Date', 'price_diff']].values.tolist()
 for row in current_diff:
-    st.sidebar.write(row)
+    st.sidebar.write(str(row[0]) + " || " + str(row[1]))
 
 
 # charts
