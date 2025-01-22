@@ -51,9 +51,7 @@ data['New_Date'] = pd.to_datetime(data['Date']).dt.date
 current_diff = data[['New_Date', 'price_diff']]
 current_diff.round(2)
 
-new_df = current_diff.groupby("New_Date",as_index=False).agg(lambda x: ','.join(x.tolist()))
-new_df['mean'] = new_df.mean(axis=1)
-st.sidebar.table(new_df)
+st.sidebar.table(current_diff)
 
 
 # charts
