@@ -46,7 +46,7 @@ st.sidebar.write("Day Low")
 st.sidebar.write(single_source.info["dayLow"])
 data['price_diff'] = data['Close'] - data['Open']
 st.sidebar.write("Current Year Data")
-data['New_Date'] = pd.to_datetime(data['Date']).date()
+data['New_Date'] = pd.to_datetime(data['Date']).dt.date
 
 current_diff = data[['New_Date', 'price_diff']]
 current_diff.round(2)
